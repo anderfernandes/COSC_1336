@@ -1,0 +1,32 @@
+main()
+
+DECLARE constant double CARBON_DIOXIDE = 258.0
+DECLARE constant double AIR            = 331.5
+DECLARE constant double HELIUM         = 972.0
+DECLARE constant double HYDROGEN       = 1270.0
+
+integer option = 0
+double  medium, seconds
+
+DO
+  
+  OUTPUT "Choose a gas: "
+  OUTPUT "1. Carbon Dioxide"
+  OUTPUT "2. Air"
+  OUTPUT "3. Helium"
+  OUTPUT "4. Hydrogen"
+  OUTPUT "Enter an option"
+
+  READ option
+
+WHILE ((option < 1) OR (option > 4))
+
+OUTPUT "Enter the number of seconds (0 to 30) it took for the sound to travel in this medium: "
+READ seconds
+
+CASE option == 1: medium = CARBON_DIOXIDE
+CASE option == 2: medium = AIR
+CASE option == 3: medium = HELIUM
+CASE option == 4: medium = HYDROGEN
+
+OUTPUT "The medium travelled " << medium * speed << " meters."  

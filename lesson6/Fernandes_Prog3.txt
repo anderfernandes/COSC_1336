@@ -1,0 +1,137 @@
+/**
+* Name: Anderson Fernandes
+* Date: December 2, 2018
+* Description: Programming Project 3
+**/
+
+function getData(int month, int amount, double data[])
+function totalRainfall(double data[], int s)
+function averageRainfall(double data[], int s)
+function wettestMonth(double data[], int s)
+function driestMonth(double data[], int s)
+function showMenu()
+function getMonth(int m)
+
+main()
+{
+  DECLARE constant integer SIZE = 12
+  DECLARE array double rainfallData[SIZE]
+  DECLARE double rainMonth, double rainAmount
+  DECLARE integer option
+  DECLARE integer driest 
+  DECLARE integer wettest 
+  
+  DO {
+    showMenu()
+    READ option
+    
+    IF (option == 1) 
+    {
+      OUTPUT "Enter the month you would like to enter rainfall data (1 ~ 12): "
+      READ   rainMonth
+      OUTPUT "Enter the amount of rainfall for month " + rainMonth + ": "
+      READ rainAmount
+      getData(rainMonth, rainAmount, rainfallData)
+      OUTPUT ""
+      option = 3
+    }
+    // Showing report
+    ELSE IF (option == 2)
+    {
+      driest  = driestMonth(rainfallData, SIZE)
+      wettest = wettestMonth(rainfallData, SIZE)
+      OUTPUT ""
+      OUTPUT "2015 Rainfall Report for Neversnows County"
+      OUTPUT "Total Rainfall: " + totalRainfall(rainfallData, SIZE) + " inches" 
+      OUTPUT "Average monthly rainfall: " + averageRainfall(rainfallData, SIZE) + " inches"
+      OUTPUT "The least rain fell in " + getMonth(driest)
+           + " with "  + rainfallData[driest] + " inches"
+      OUTPUT "The most rain fell in " + getMonth(wettest)
+           + " with "  + rainfallData[wettest] + " inches"  
+      OUTPUT ""
+      option = 3
+    }
+    // Break out of the loop and end program if user enters 0
+    ELSE IF(option == 0)
+      BREAK
+    
+  } while (option != 1 && option != 2)
+
+}
+
+// This function takes a month number, the amount of rainfall and the array with the data
+FUNCTION getData(int month, int amount, double data[])
+{
+  data[month - 1] = amount
+}
+
+// This function loops through the array to calculate the total amount of rainfall
+FUNCTION totalRainfall(double data[], int s)
+{
+  double total = 0 
+  for (int i = 0; i <= s; i++)
+    total += data[i]
+  return total
+}
+
+// This function loops through the array to calculate the average amount of rainfall and returns it
+FUNCTION averageRainfall(double data[], int s)
+{
+  double total = totalRainfall(data, s)
+  double average = total / s
+  return average
+}
+
+// This function loops through the array to find the month with the most amount of rain and returns it
+FUNCTION wettestMonth(double data[], int s)
+{
+  int highest = data[0]
+  for (int i = 0; i < s; i++)
+    if (data[i] > highest)
+      highest = i
+      
+  return highest
+}
+
+// This function loops through the array to find the month with the least amount of rain and returns it
+FUNCTION driestMonth(double data[], int s)
+{
+  int lowest = data[0]
+  for (int i = 0; i < s; i++)
+    if (data[i] < lowest)
+      lowest = data[i]
+  
+  return lowest
+}
+
+// Shows menu with options for the user to choose
+FUNCTION showMenu()
+{
+  OUTPUT "1. Enter rainfall data for a particular month"
+  OUTPUT "2. Display a report of rainfall data"
+  OUTPUT "0. Exit"
+  OUTPUT "Your choice: "
+}
+
+// This function takes a number representing a month and returns a string with the name of the month
+FUNCTION getMonth(int m)
+{
+  string month
+  switch (m)
+  {
+    case 0 : month = "January"  
+    case 1 : month = "February" 
+    case 2 : month = "March"    
+    case 3 : month = "April"    
+    case 4 : month = "May"      
+    case 5 : month = "June"     
+    case 6 : month = "July"     
+    case 7 : month = "August"   
+    case 8 : month = "September"
+    case 9 : month = "October"  
+    case 10: month = "November" 
+    case 11: month = "December" 
+    default: month = "Invalid Month"
+  }
+  return month
+}
